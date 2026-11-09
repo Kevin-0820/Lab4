@@ -1,0 +1,16 @@
+# Actividad 5: construccion multi-stage.
+# Etapa build: compila con Maven y JDK.
+FROM maven:3.9.9-eclipse-temurin-21 AS build
+WORKDIR /build
+COPY pom.xml .
+RUN mvn -B dependency:go-offline
+COPY src ./src
+RUN mvn -B clean package -DskipTests
+
+# Etapa runtime: solo el JRE y el JAR.
+FROM eclipse-temurin:21-jre
+ENV TZ="America/Bogota"
+WORKDIR /app
+COPY --from=build /build/target/auth-service-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "app.jar"]

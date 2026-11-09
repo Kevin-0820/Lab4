@@ -1,0 +1,12 @@
+# Archivos generados por Maven
+target/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Sistema
+Thumbs.db
+desktop.ini
+~$*.docx

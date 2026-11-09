@@ -1,0 +1,40 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: consulta-service
+  datasource:
+    url: jdbc:h2:mem:demoacademico;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format-sql: true
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+services:
+  auth:
+    url: http://localhost:8081
+app:
+  seed:
+    enabled: true
+    cantidad-estudiantes: 50
+    cantidad-programas: 3
+    cantidad-asignaturas: 10
+    cantidad-grupos: 20
